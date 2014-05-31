@@ -1,0 +1,17 @@
+script(type="text/x-handlebars", data-template-name="posts/index").
+
+    <div class="posts">
+      <ul class="post-list">
+        {{#each itemController="post"}}
+        <li {{bind-attr class='isShared:shared isEditing:editing'}}>
+          {{#if isEditing}}
+            {{edit-post class="edit" value=title focus-out="acceptChanges"
+                             insert-newline="acceptChanges"}}
+          {{else}}
+            {{input type="checkbox" checked=isShared class="toggle"}}
+            <label {{action "editPost" on="doubleClick"}}>{{title}}</label><button {{action "removePost"}} class="destroy">x</button>
+          {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+    </div>

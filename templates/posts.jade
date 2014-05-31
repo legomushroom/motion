@@ -1,0 +1,24 @@
+script(type="text/x-handlebars", data-template-name="posts").
+  <div class="posts">
+    <p> posts template </p>
+    {{input type="text" id="new-post" placeholder="What needs to be done?" 
+              value=newTitle action="createPost"}}
+    <ul class="post-list">
+      {{#each itemController="post"}}
+      <li {{bind-attr class='isShared:shared isEditing:editing'}}>
+        {{#if isEditing}}
+          {{edit-post class="edit" value=title focus-out="acceptChanges"
+                           insert-newline="acceptChanges"}}
+        {{else}}
+          {{input type="checkbox" checked=isShared class="toggle"}}
+          <label {{action "editPost" on="doubleClick"}}>{{title}}</label><button {{action "removePost"}} class="destroy">x</button>
+        {{/if}}
+      </li>
+      {{/each}}
+      <span id="post-count">
+        <p>--------->>>>>></p>
+        <strong>{{remaining}}</strong> {{inflection}} shared
+      </span>
+    </ul>
+
+  </div>

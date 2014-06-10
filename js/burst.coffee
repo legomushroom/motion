@@ -4,39 +4,18 @@ class Burst extends motion.Bit
 
   init:()->
     @radius ?= @o.radius or 80
-    @cnt     = @o.cnt
+    @cnt     = @o.cnt-1
     @cloneBits
-      class: 'center wrap'
+      class: 'bit'
       cnt: @cnt
-      nest: [
-        class: 'center bit'
-      ]
-    @setRotation()
+
+    @setRotation(1)
     @add2Dom()
     @
 
-  setRotation:(reset)->
-    step = (2*Math.PI)/@cnt
-    rotateStep = 360/@cnt
-    rotateAngle = 0
-    angle = 0
-    centerX = 0
-    centerY = 0
-    for $el, i in @$nests[0]
-      left  = parseInt(centerX+(Math.cos(angle)*(@radius)),10)
-      top   = parseInt(centerY+(Math.sin(angle)*(@radius)),10)
-      $el.velocity
-          rotateZ: rotateAngle+90
-          opacity: 0
-          height: 40
-        ,
-          duration: 1
-
-      rotateAngle += rotateStep
-      angle += step
-
-    step = (2*Math.PI)/@cnt
-    rotateStep = 360/@cnt
+  setRotation:(duration=400)->
+    step = (2*Math.PI)/(@cnt+1)
+    rotateStep = 360/(@cnt+1)
     rotateAngle = 0
     angle = 0
     centerX = 0
@@ -45,19 +24,14 @@ class Burst extends motion.Bit
       left  = parseInt(centerX+(Math.cos(angle)*(@radius)),10)
       top   = parseInt(centerY+(Math.sin(angle)*(@radius)),10)
       $el.velocity
-          translateX:  left/2
-          translateY:  top/2
-        ,
-          duration: if reset then 1 else 400
+        translateX:  left/2
+        translateY:  top/2
+        rotateZ: rotateAngle+90
+      ,
+        duration: duration
 
       rotateAngle += rotateStep
       angle += step
-
-
-  animate:->
-    @reset()
-    step = (2*Math.PI)/@cnt
-    rotateStep = 360/@cnt
     rotateAngle = 0
     angle = 0
     centerX = 0
@@ -66,44 +40,22 @@ class Burst extends motion.Bit
       left  = parseInt(centerX+(Math.cos(angle)*(@radius)),10)
       top   = parseInt(centerY+(Math.sin(angle)*(@radius)),10)
       $el.velocity
-          translateX:  left
-          translateY:  top
-        ,
-          duration: 400
-          # complete:=>
+        translateX:  1.5*left
+        translateY:  1.5*top
+      ,
+        duration: 1400
 
       rotateAngle += rotateStep
       angle += step
-
-    for $el, i in @$nests[0]
-      $el.velocity
-        height: 0
-        opacity: 100
-      ,
-        duration: 400
-        delay: 100
-
-    @$el.velocity
-        translateY: 30
-      ,
-        delay: 100
-        duration: 400
-
-  reset:->
-    @setRotation(true)
-    @$el.velocity
-        translateY: 0
-      ,
-        duration: 1
-
 
 window.motion.Burst = Burst
 
 burst = new Burst
-  cnt: 4
-setInterval =>
-  burst.animate()
-, 1000
+  cnt: 5
+
+# setInterval =>
+#   burst.animate()
+# , 1000
 
 
 # $(window).on 'click', (e)->

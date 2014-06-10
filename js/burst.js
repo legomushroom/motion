@@ -16,46 +16,42 @@
       if (this.radius == null) {
         this.radius = this.o.radius || 80;
       }
-      this.cnt = this.o.cnt;
+      this.cnt = this.o.cnt - 1;
       this.cloneBits({
-        "class": 'center wrap',
-        cnt: this.cnt,
-        nest: [
-          {
-            "class": 'center bit'
-          }
-        ]
+        "class": 'bit',
+        cnt: this.cnt
       });
-      this.setRotation();
+      this.setRotation(1);
       this.add2Dom();
       return this;
     };
 
-    Burst.prototype.setRotation = function(reset) {
+    Burst.prototype.setRotation = function(duration) {
       var $el, angle, centerX, centerY, i, left, rotateAngle, rotateStep, step, top, _i, _j, _len, _len1, _ref, _ref1, _results;
-      step = (2 * Math.PI) / this.cnt;
-      rotateStep = 360 / this.cnt;
+      if (duration == null) {
+        duration = 400;
+      }
+      step = (2 * Math.PI) / (this.cnt + 1);
+      rotateStep = 360 / (this.cnt + 1);
       rotateAngle = 0;
       angle = 0;
       centerX = 0;
       centerY = 0;
-      _ref = this.$nests[0];
+      _ref = this.$els;
       for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
         $el = _ref[i];
         left = parseInt(centerX + (Math.cos(angle) * this.radius), 10);
         top = parseInt(centerY + (Math.sin(angle) * this.radius), 10);
         $el.velocity({
-          rotateZ: rotateAngle + 90,
-          opacity: 0,
-          height: 40
+          translateX: left / 2,
+          translateY: top / 2,
+          rotateZ: rotateAngle + 90
         }, {
-          duration: 1
+          duration: duration
         });
         rotateAngle += rotateStep;
         angle += step;
       }
-      step = (2 * Math.PI) / this.cnt;
-      rotateStep = 360 / this.cnt;
       rotateAngle = 0;
       angle = 0;
       centerX = 0;
@@ -67,66 +63,15 @@
         left = parseInt(centerX + (Math.cos(angle) * this.radius), 10);
         top = parseInt(centerY + (Math.sin(angle) * this.radius), 10);
         $el.velocity({
-          translateX: left / 2,
-          translateY: top / 2
+          translateX: 1.5 * left,
+          translateY: 1.5 * top
         }, {
-          duration: reset ? 1 : 400
+          duration: 1400
         });
         rotateAngle += rotateStep;
         _results.push(angle += step);
       }
       return _results;
-    };
-
-    Burst.prototype.animate = function() {
-      var $el, angle, centerX, centerY, i, left, rotateAngle, rotateStep, step, top, _i, _j, _len, _len1, _ref, _ref1;
-      this.reset();
-      step = (2 * Math.PI) / this.cnt;
-      rotateStep = 360 / this.cnt;
-      rotateAngle = 0;
-      angle = 0;
-      centerX = 0;
-      centerY = 0;
-      _ref = this.$els;
-      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
-        $el = _ref[i];
-        left = parseInt(centerX + (Math.cos(angle) * this.radius), 10);
-        top = parseInt(centerY + (Math.sin(angle) * this.radius), 10);
-        $el.velocity({
-          translateX: left,
-          translateY: top
-        }, {
-          duration: 400
-        });
-        rotateAngle += rotateStep;
-        angle += step;
-      }
-      _ref1 = this.$nests[0];
-      for (i = _j = 0, _len1 = _ref1.length; _j < _len1; i = ++_j) {
-        $el = _ref1[i];
-        $el.velocity({
-          height: 0,
-          opacity: 100
-        }, {
-          duration: 400,
-          delay: 100
-        });
-      }
-      return this.$el.velocity({
-        translateY: 30
-      }, {
-        delay: 100,
-        duration: 400
-      });
-    };
-
-    Burst.prototype.reset = function() {
-      this.setRotation(true);
-      return this.$el.velocity({
-        translateY: 0
-      }, {
-        duration: 1
-      });
     };
 
     return Burst;
@@ -136,13 +81,7 @@
   window.motion.Burst = Burst;
 
   burst = new Burst({
-    cnt: 4
+    cnt: 5
   });
-
-  setInterval((function(_this) {
-    return function() {
-      return burst.animate();
-    };
-  })(this), 1000);
 
 }).call(this);

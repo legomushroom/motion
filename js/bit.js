@@ -30,22 +30,25 @@
       if (o == null) {
         o = {};
       }
-      $proto = !o.$proto && $('<div>');
+      $proto = o.$proto || $('<div />');
       _results = [];
       for (i = _i = 0, _ref = o.cnt || 10; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
         $el = $proto.clone();
         o["class"] && $el.addClass("" + (o["class"] || ''));
         o.css && $el.css(o.css);
-        for (i = _j = 2, _ref1 = 2 + o.nest.length; 2 <= _ref1 ? _j < _ref1 : _j > _ref1; i = 2 <= _ref1 ? ++_j : --_j) {
-          $nest = $("<div class='bit nest--" + i + " " + o.nest[i - 2]["class"] + "' />");
-          if ((_base = this.$nests)[_name = i - 2] == null) {
-            _base[_name] = [];
+        if (o.nest) {
+          for (i = _j = 2, _ref1 = 2 + o.nest.length; 2 <= _ref1 ? _j < _ref1 : _j > _ref1; i = 2 <= _ref1 ? ++_j : --_j) {
+            $nest = $("<div class='bit nest--" + i + " " + o.nest[i - 2]["class"] + "' />");
+            if ((_base = this.$nests)[_name = i - 2] == null) {
+              _base[_name] = [];
+            }
+            this.$nests[i - 2].push($nest);
+            $el.append($nest);
           }
-          this.$nests[i - 2].push($nest);
-          $el.append($nest);
         }
         this.$els.push($el);
-        _results.push(this.$el.append($el));
+        this.$el.append($el);
+        _results.push(this.$els);
       }
       return _results;
     };

@@ -1237,10 +1237,16 @@ a,
   position: absolute;
   opacity: 0;
 }
+.motion-effect--burst {
+  border-radius: 50%;
+}
 .motion-effect--burst .bit {
   width: 2px;
   height: 24px;
   margin-top: -12px;
   margin-left: -1px;
   background: #ff1493;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }

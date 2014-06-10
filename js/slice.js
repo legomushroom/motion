@@ -95,13 +95,4 @@
 
   slice = new Slice;
 
-  setTimeout((function(_this) {
-    return function() {
-      return slice.animate({
-        from: [100, 100],
-        to: [500, 500]
-      });
-    };
-  })(this), 1000);
-
 }).call(this);

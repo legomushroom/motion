@@ -98,10 +98,10 @@ class Burst extends motion.Bit
 
 window.motion.Burst = Burst
 
-# burst = new Burst
-# setInterval =>
-#   burst.animate()
-# , 2000
+burst = new Burst
+setInterval =>
+  burst.animate()
+, 2000
 
 
 # $(window).on 'click', (e)->

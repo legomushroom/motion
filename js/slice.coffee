@@ -70,11 +70,11 @@ window.Slice = Slice
 
 slice = new Slice
 
-setTimeout =>
-  slice.animate
-    from: [100,100]
-    to:   [500,500]
-, 1000
+# setInterval =>
+#   slice.animate
+#     from: [100,100]
+#     to:   [500,500]
+# , 1000
 
 # timeout = null
 # click = true

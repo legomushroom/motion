@@ -46,18 +46,18 @@ class Burst extends motion.Bit
     centerY = 0
     for $el, i in @$els
       left  = parseInt(centerX+(Math.cos(angle)*(@radius)),10)
-      top   = parseInt(centerY+(Math.sin(angle)*(@radius)),10)
+      top   = parseInt(centerY-50+(Math.sin(angle)*(@radius)),10)
       
-      size = 10
-      if left < 0 then left -= size
-      else left += size
-      if top < 0 then top -= size
-      else top += size
+      size = 100
+      # if left < 0 then left -= size
+      # else left += size
+      # if top < 0 then top -= size
+      # else top += size
       $el.velocity
-        translateX:  left
-        translateY:  top
-        height: 140
-        marginTop: -70
+        translateX:  1.1*left
+        translateY:  1.1*top
+        height: size
+        marginTop: -(size/2)
       ,
         duration: 500
 
@@ -67,10 +67,10 @@ class Burst extends motion.Bit
 window.motion.Burst = Burst
 
 burst = new Burst
-  cnt: 5
+  cnt: 10
   radius: 100
 
-setInterval =>
+setInterval ->
   burst.animate()
 , 1000
 

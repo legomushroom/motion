@@ -29,18 +29,18 @@
   //   background deeppink
   &--burst
     width  = gs/4
-    height = 0
-    hll deeppink
+    height = 0*gs
+    // hll deeppink
     border-radius 50%
     .bit
       width  width
       height height
       margin-top  -(height/2)
-      // margin-left -(width/2)
+      margin-left -(width/2)
       background deeppink
       position absolute
       nw 50%
-      transform-origin left center
+      transform-origin left bottom
 
 // .wrap
 //   position absolute

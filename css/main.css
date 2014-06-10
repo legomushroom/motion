@@ -1238,18 +1238,18 @@ a,
   opacity: 0;
 }
 .motion-effect--burst {
-  border: 1px solid #ff1493;
   border-radius: 50%;
 }
 .motion-effect--burst .bit {
   width: 2px;
-  height: 0;
-  margin-top: 0;
+  height: 0px;
+  margin-top: 0px;
+  margin-left: -1px;
   background: #ff1493;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform-origin: left center;
-  -ms-transform-origin: left center;
-  transform-origin: left center;
+  -webkit-transform-origin: left bottom;
+  -ms-transform-origin: left bottom;
+  transform-origin: left bottom;
 }

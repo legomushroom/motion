@@ -75,23 +75,13 @@
       for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
         $el = _ref[i];
         left = parseInt(centerX + (Math.cos(angle) * this.radius), 10);
-        top = parseInt(centerY + (Math.sin(angle) * this.radius), 10);
-        size = 10;
-        if (left < 0) {
-          left -= size;
-        } else {
-          left += size;
-        }
-        if (top < 0) {
-          top -= size;
-        } else {
-          top += size;
-        }
+        top = parseInt(centerY - 50 + (Math.sin(angle) * this.radius), 10);
+        size = 100;
         $el.velocity({
-          translateX: left,
-          translateY: top,
-          height: 140,
-          marginTop: -70
+          translateX: 1.1 * left,
+          translateY: 1.1 * top,
+          height: size,
+          marginTop: -(size / 2)
         }, {
           duration: 500
         });
@@ -108,14 +98,12 @@
   window.motion.Burst = Burst;
 
   burst = new Burst({
-    cnt: 5,
+    cnt: 10,
     radius: 100
   });
 
-  setInterval((function(_this) {
-    return function() {
-      return burst.animate();
-    };
-  })(this), 1000);
+  setInterval(function() {
+    return burst.animate();
+  }, 1000);
 
 }).call(this);

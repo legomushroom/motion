@@ -53,6 +53,7 @@ class Burst extends motion.Bit
       rotateAngle += rotateStep
       angle += step
 
+
   animate:->
     @reset()
     step = (2*Math.PI)/@cnt

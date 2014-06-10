@@ -44,14 +44,14 @@ class Slice extends motion.Bit
       ,
         duration: @duration
         easeing: 'easeOutExpo'
-    )
+      )
 
     @$el.velocity(
-        opacity: 0
-      ,
-        duration: @duration/2
-        delay: @duration/2
-    )
+      opacity: 0
+    ,
+      duration: @duration/2
+      delay: @duration/2
+      )
 
   reset:->
     @$bit.velocity

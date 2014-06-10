@@ -1,5 +1,5 @@
 # HELPERS
-motion.helpers = 
+motion.helpers =
   extend: ->
 
 

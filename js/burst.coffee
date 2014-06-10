@@ -2,9 +2,9 @@ class Burst extends motion.Bit
 
   type: 'burst'
 
-  init:->
+  init:()->
     @radius ?= @o.radius or 80
-    @cnt     = @radius/9
+    @cnt     = @o.cnt
     @cloneBits
       class: 'center wrap'
       cnt: @cnt
@@ -100,9 +100,10 @@ class Burst extends motion.Bit
 window.motion.Burst = Burst
 
 burst = new Burst
+  cnt: 4
 setInterval =>
   burst.animate()
-, 2000
+, 1000
 
 
 # $(window).on 'click', (e)->

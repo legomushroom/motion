@@ -16,7 +16,7 @@
       if (this.radius == null) {
         this.radius = this.o.radius || 80;
       }
-      this.cnt = this.radius / 9;
+      this.cnt = this.o.cnt;
       this.cloneBits({
         "class": 'center wrap',
         cnt: this.cnt,
@@ -135,12 +135,14 @@
 
   window.motion.Burst = Burst;
 
-  burst = new Burst;
+  burst = new Burst({
+    cnt: 4
+  });
 
   setInterval((function(_this) {
     return function() {
       return burst.animate();
     };
-  })(this), 2000);
+  })(this), 1000);
 
 }).call(this);

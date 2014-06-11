@@ -1,5 +1,5 @@
 (function() {
-  var Burst, burst1, burst2, burst3, size,
+  var Burst, burst0, burst1, burst2, burst3, size,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -113,7 +113,8 @@
           height: size,
           marginTop: -(size / 2)
         }, {
-          duration: 400
+          duration: 400,
+          delay: (o != null ? o.delay : void 0) || 0
         });
         rotateAngle += this.rotateStep;
         angle += this.step;
@@ -158,6 +159,15 @@
 
   size = 30;
 
+  burst0 = new Burst({
+    cnt: 5,
+    radius: size + motion.helpers.rand(-(size / 2), size / 2),
+    left: 500,
+    top: 500
+  });
+
+  size = 30;
+
   burst1 = new Burst({
     cnt: 5,
     radius: size + motion.helpers.rand(-(size / 2), size / 2),
@@ -181,20 +191,30 @@
 
   setTimeout((function(_this) {
     return function() {
-      burst1.animate();
-      setTimeout(function() {
-        return burst2.animate({
-          left: 540,
-          top: 520
-        });
-      }, 200);
-      return setTimeout(function() {
-        return burst3.animate({
-          left: 520,
-          top: 480
-        });
-      }, 300);
+      burst1.animate({
+        rotation: 90
+      });
+      burst2.animate({
+        left: 540,
+        top: 520,
+        delay: 200,
+        rotation: 90
+      });
+      return burst3.animate({
+        left: 520,
+        top: 480,
+        delay: 300,
+        rotation: 90
+      });
     };
   })(this), 2000);
+
+  $(window).on('click', function(e) {
+    return burst0.animate({
+      left: e.pageX,
+      top: e.pageY,
+      rotation: 90
+    });
+  });
 
 }).call(this);

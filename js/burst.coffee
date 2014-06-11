@@ -1,3 +1,8 @@
+# TODO
+# normalize init and animate options
+# change !property to property?
+
+
 class Burst extends motion.Bit
 
   type: 'burst'
@@ -75,6 +80,7 @@ class Burst extends motion.Bit
         marginTop: -(size/2)
       ,
         duration: 400
+        delay: o?.delay or 0
 
       rotateAngle += @rotateStep
       angle += @step
@@ -101,6 +107,15 @@ class Burst extends motion.Bit
 
 window.motion.Burst = Burst
 
+
+size = 30
+burst0 = new Burst
+  cnt: 5
+  radius: size + motion.helpers.rand(-(size/2),(size/2))
+  left: 500
+  top:  500
+
+
 size = 30
 burst1 = new Burst
   cnt: 5
@@ -119,20 +134,22 @@ burst3 = new Burst
   radius: size + motion.helpers.rand(-(size/2),(size/2))
 
 setTimeout =>
-  burst1.animate()
+  burst1.animate(
+    rotation: 90
+  )
 
-  setTimeout =>
-    burst2.animate
-      left: 540
-      top:  520
-      # rotation: 90
-  , 200
-  setTimeout =>
-    burst3.animate
-      left: 520
-      top:  480
-      # rotation: 120
-  , 300
+  burst2.animate
+    left: 540
+    top:  520
+    delay: 200
+    rotation: 90
+
+  burst3.animate
+    left: 520
+    top:  480
+    delay: 300
+    rotation: 90
+
 , 2000
 
 # setInterval ->
@@ -142,8 +159,8 @@ setTimeout =>
 # , 2000
 
 
-# $(window).on 'click', (e)->
-#   burst.animate
-#     left: e.pageX
-#     top:  e.pageY
-#     rotation: 90
+$(window).on 'click', (e)->
+  burst0.animate
+    left: e.pageX
+    top:  e.pageY
+    rotation: 90

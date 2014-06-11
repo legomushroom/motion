@@ -1,5 +1,5 @@
 (function() {
-  var Burst, burst,
+  var Burst, burst1, burst2, burst3,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -140,17 +140,42 @@
 
   window.motion.Burst = Burst;
 
-  burst = new Burst({
-    cnt: 3,
-    radius: 60
+  burst1 = new Burst({
+    cnt: 5,
+    radius: 20
   });
 
-  $(window).on('click', function(e) {
-    return burst.animate({
-      left: e.pageX,
-      top: e.pageY,
-      rotation: 90
-    });
+  burst2 = new Burst({
+    cnt: 5,
+    radius: 40
   });
+
+  burst3 = new Burst({
+    cnt: 5,
+    radius: 20
+  });
+
+  setTimeout((function(_this) {
+    return function() {
+      burst1.animate({
+        left: 500,
+        top: 500
+      });
+      setTimeout(function() {
+        return burst2.animate({
+          left: 540,
+          top: 520,
+          rotation: 90
+        });
+      }, 200);
+      return setTimeout(function() {
+        return burst3.animate({
+          left: 520,
+          top: 480,
+          rotation: 120
+        });
+      }, 300);
+    };
+  })(this), 2000);
 
 }).call(this);

@@ -1,6 +1,7 @@
 # HELPERS
 motion.helpers =
-  extend: ->
+  random: ->
+
 
 
 

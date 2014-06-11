@@ -1,6 +1,6 @@
 (function() {
   motion.helpers = {
-    extend: function() {}
+    random: function() {}
   };
 
 }).call(this);

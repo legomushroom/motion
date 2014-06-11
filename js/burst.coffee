@@ -91,9 +91,35 @@ class Burst extends motion.Bit
 
 window.motion.Burst = Burst
 
-burst = new Burst
-  cnt: 3
-  radius: 60
+burst1 = new Burst
+  cnt: 5
+  radius: 20
+
+burst2 = new Burst
+  cnt: 5
+  radius: 40
+
+burst3 = new Burst
+  cnt: 5
+  radius: 20
+
+setTimeout =>
+  burst1.animate
+    left: 500
+    top:  500
+  setTimeout =>
+    burst2.animate
+      left: 540
+      top:  520
+      rotation: 90
+  , 200
+  setTimeout =>
+    burst3.animate
+      left: 520
+      top:  480
+      rotation: 120
+  , 300
+, 2000
 
 # setInterval ->
 #   burst.animate
@@ -102,8 +128,8 @@ burst = new Burst
 # , 2000
 
 
-$(window).on 'click', (e)->
-  burst.animate
-    left: e.pageX
-    top:  e.pageY
-    rotation: 90
+# $(window).on 'click', (e)->
+#   burst.animate
+#     left: e.pageX
+#     top:  e.pageY
+#     rotation: 90

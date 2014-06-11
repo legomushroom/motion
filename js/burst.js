@@ -52,8 +52,8 @@
         left = parseInt(centerX + (Math.cos(angle) * this.radius), 10);
         top = parseInt(centerY + (Math.sin(angle) * this.radius), 10);
         $el.velocity({
-          translateX: left / 5,
-          translateY: top / 5,
+          translateX: left / 2,
+          translateY: top / 2,
           rotateZ: rotateAngle + 90
         }, {
           duration: duration
@@ -64,31 +64,44 @@
       return _results;
     };
 
-    Burst.prototype.animate = function() {
-      var $el, angle, centerX, centerY, i, left, rotateAngle, size, top, _i, _len, _ref, _results;
+    Burst.prototype.animate = function(position) {
+      var $el, angle, centerX, centerY, i, left, rotateAngle, size, top, _i, _len, _ref;
       rotateAngle = 0;
       angle = 0;
       centerX = 0;
       centerY = 0;
       _ref = this.$els;
-      _results = [];
       for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
         $el = _ref[i];
         left = parseInt(centerX + (Math.cos(angle) * this.radius), 10);
-        top = parseInt(centerY - 50 + (Math.sin(angle) * this.radius), 10);
-        size = 100;
+        top = parseInt(centerY - (this.radius / 2) + (Math.sin(angle) * this.radius), 10);
+        size = this.radius;
+        if (left < 0) {
+          left -= 1;
+        } else {
+          left += 1;
+        }
+        if (top < 0) {
+          top -= 1;
+        } else {
+          top += 1;
+        }
         $el.velocity({
-          translateX: 1.1 * left,
-          translateY: 1.1 * top,
+          translateX: 1 * left,
+          translateY: 1 * top,
           height: size,
           marginTop: -(size / 2)
         }, {
           duration: 500
         });
         rotateAngle += this.rotateStep;
-        _results.push(angle += this.step);
+        angle += this.step;
       }
-      return _results;
+      return this.$el.velocity({
+        rotateZ: 90
+      }, {
+        duration: 1400
+      });
     };
 
     return Burst;
@@ -99,11 +112,14 @@
 
   burst = new Burst({
     cnt: 10,
-    radius: 100
+    radius: 50
   });
 
   setInterval(function() {
-    return burst.animate();
+    return burst.animate({
+      x: 200,
+      y: 200
+    });
   }, 1000);
 
 }).call(this);

@@ -22,6 +22,13 @@ class Burst extends motion.Bit
       height: 2*@o.radius or 200
 
   setRotation:(duration=400)->
+    if @o.left
+      @$el.css
+        left: @o.left - @radius
+    if @o.top
+      @$el.css
+        top: @o.top - @radius
+
     rotateAngle = 0
     angle = 0
     centerX = 0
@@ -41,9 +48,12 @@ class Burst extends motion.Bit
 
   animate:(o)->
     @reset()
-    @$el.css
-      left: o.left - @radius
-      top:  o.top  - @radius
+    if o?.left
+      @$el.css
+        left: o.left - @radius
+    if o?.top
+      @$el.css
+        top: o.top - @radius
 
     rotateAngle = 0
     angle = 0
@@ -69,11 +79,11 @@ class Burst extends motion.Bit
       rotateAngle += @rotateStep
       angle += @step
 
-    if o.rotation or o.rotationDuration
+    if o?.rotation or o?.rotationDuration
       @$el.velocity
-          rotateZ:  o.rotation or 90
+          rotateZ:  o?.rotation or 90
         ,
-          duration: o.rotationDuration or 1200
+          duration: o?.rotationDuration or 1200
 
   reset:->
     @$el.velocity
@@ -91,33 +101,37 @@ class Burst extends motion.Bit
 
 window.motion.Burst = Burst
 
+size = 30
 burst1 = new Burst
   cnt: 5
-  radius: 20
+  radius: size + motion.helpers.rand(-(size/2),(size/2))
+  left: 500
+  top:  500
 
+size = 40
 burst2 = new Burst
   cnt: 5
-  radius: 40
+  radius: size + motion.helpers.rand(-(size/2),(size/2))
 
+size = 20
 burst3 = new Burst
   cnt: 5
-  radius: 20
+  radius: size + motion.helpers.rand(-(size/2),(size/2))
 
 setTimeout =>
-  burst1.animate
-    left: 500
-    top:  500
+  burst1.animate()
+
   setTimeout =>
     burst2.animate
       left: 540
       top:  520
-      rotation: 90
+      # rotation: 90
   , 200
   setTimeout =>
     burst3.animate
       left: 520
       top:  480
-      rotation: 120
+      # rotation: 120
   , 300
 , 2000
 

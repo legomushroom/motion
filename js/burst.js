@@ -1,5 +1,5 @@
 (function() {
-  var Burst, burst1, burst2, burst3,
+  var Burst, burst1, burst2, burst3, size,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -41,6 +41,16 @@
       if (duration == null) {
         duration = 400;
       }
+      if (this.o.left) {
+        this.$el.css({
+          left: this.o.left - this.radius
+        });
+      }
+      if (this.o.top) {
+        this.$el.css({
+          top: this.o.top - this.radius
+        });
+      }
       rotateAngle = 0;
       angle = 0;
       centerX = 0;
@@ -67,10 +77,16 @@
     Burst.prototype.animate = function(o) {
       var $el, angle, centerX, centerY, i, left, rotateAngle, size, top, _i, _len, _ref;
       this.reset();
-      this.$el.css({
-        left: o.left - this.radius,
-        top: o.top - this.radius
-      });
+      if (o != null ? o.left : void 0) {
+        this.$el.css({
+          left: o.left - this.radius
+        });
+      }
+      if (o != null ? o.top : void 0) {
+        this.$el.css({
+          top: o.top - this.radius
+        });
+      }
       rotateAngle = 0;
       angle = 0;
       centerX = 0;
@@ -102,11 +118,11 @@
         rotateAngle += this.rotateStep;
         angle += this.step;
       }
-      if (o.rotation || o.rotationDuration) {
+      if ((o != null ? o.rotation : void 0) || (o != null ? o.rotationDuration : void 0)) {
         return this.$el.velocity({
-          rotateZ: o.rotation || 90
+          rotateZ: (o != null ? o.rotation : void 0) || 90
         }, {
-          duration: o.rotationDuration || 1200
+          duration: (o != null ? o.rotationDuration : void 0) || 1200
         });
       }
     };
@@ -140,39 +156,42 @@
 
   window.motion.Burst = Burst;
 
+  size = 30;
+
   burst1 = new Burst({
     cnt: 5,
-    radius: 20
+    radius: size + motion.helpers.rand(-(size / 2), size / 2),
+    left: 500,
+    top: 500
   });
+
+  size = 40;
 
   burst2 = new Burst({
     cnt: 5,
-    radius: 40
+    radius: size + motion.helpers.rand(-(size / 2), size / 2)
   });
+
+  size = 20;
 
   burst3 = new Burst({
     cnt: 5,
-    radius: 20
+    radius: size + motion.helpers.rand(-(size / 2), size / 2)
   });
 
   setTimeout((function(_this) {
     return function() {
-      burst1.animate({
-        left: 500,
-        top: 500
-      });
+      burst1.animate();
       setTimeout(function() {
         return burst2.animate({
           left: 540,
-          top: 520,
-          rotation: 90
+          top: 520
         });
       }, 200);
       return setTimeout(function() {
         return burst3.animate({
           left: 520,
-          top: 480,
-          rotation: 120
+          top: 480
         });
       }, 300);
     };

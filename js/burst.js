@@ -52,8 +52,8 @@
         left = parseInt(centerX + (Math.cos(angle) * this.radius), 10);
         top = parseInt(centerY + (Math.sin(angle) * this.radius), 10);
         $el.velocity({
-          translateX: left / 2,
-          translateY: top / 2,
+          translateX: left / 6,
+          translateY: top / 6,
           rotateZ: rotateAngle + 90
         }, {
           duration: duration
@@ -64,8 +64,13 @@
       return _results;
     };
 
-    Burst.prototype.animate = function(position) {
+    Burst.prototype.animate = function(o) {
       var $el, angle, centerX, centerY, i, left, rotateAngle, size, top, _i, _len, _ref;
+      this.reset();
+      this.$el.css({
+        left: o.left - this.radius,
+        top: o.top - this.radius
+      });
       rotateAngle = 0;
       angle = 0;
       centerX = 0;
@@ -73,8 +78,8 @@
       _ref = this.$els;
       for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
         $el = _ref[i];
-        left = parseInt(centerX + (Math.cos(angle) * this.radius), 10);
-        top = parseInt(centerY - (this.radius / 2) + (Math.sin(angle) * this.radius), 10);
+        left = centerX + (Math.cos(angle) * this.radius);
+        top = centerY - (this.radius / 2) + (Math.sin(angle) * this.radius);
         size = this.radius;
         if (left < 0) {
           left -= 1;
@@ -92,16 +97,41 @@
           height: size,
           marginTop: -(size / 2)
         }, {
-          duration: 500
+          duration: 400
         });
         rotateAngle += this.rotateStep;
         angle += this.step;
       }
-      return this.$el.velocity({
-        rotateZ: 90
+      if (o.rotation || o.rotationDuration) {
+        return this.$el.velocity({
+          rotateZ: o.rotation || 90
+        }, {
+          duration: o.rotationDuration || 1200
+        });
+      }
+    };
+
+    Burst.prototype.reset = function() {
+      var $el, i, _i, _len, _ref, _results;
+      this.$el.velocity({
+        rotateZ: 0
       }, {
-        duration: 1400
+        duration: 1
       });
+      _ref = this.$els;
+      _results = [];
+      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+        $el = _ref[i];
+        _results.push($el.velocity({
+          translateY: 0,
+          translateX: 0,
+          marginTop: 0,
+          height: 0
+        }, {
+          duration: 1
+        }));
+      }
+      return _results;
     };
 
     return Burst;
@@ -111,15 +141,16 @@
   window.motion.Burst = Burst;
 
   burst = new Burst({
-    cnt: 10,
-    radius: 50
+    cnt: 3,
+    radius: 60
   });
 
-  setInterval(function() {
+  $(window).on('click', function(e) {
     return burst.animate({
-      x: 200,
-      y: 200
+      left: e.pageX,
+      top: e.pageY,
+      rotation: 90
     });
-  }, 1000);
+  });
 
 }).call(this);

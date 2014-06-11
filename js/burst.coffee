@@ -30,8 +30,8 @@ class Burst extends motion.Bit
       left  = parseInt(centerX+(Math.cos(angle)*(@radius)),10)
       top   = parseInt(centerY+(Math.sin(angle)*(@radius)),10)
       $el.velocity
-        translateX:  left/2
-        translateY:  top/2
+        translateX:  left/6
+        translateY:  top/6
         rotateZ: rotateAngle+90
       ,
         duration: duration
@@ -39,14 +39,19 @@ class Burst extends motion.Bit
       rotateAngle += @rotateStep
       angle += @step
 
-  animate:(position)->
+  animate:(o)->
+    @reset()
+    @$el.css
+      left: o.left - @radius
+      top:  o.top  - @radius
+
     rotateAngle = 0
     angle = 0
     centerX = 0
     centerY = 0
     for $el, i in @$els
-      left  = parseInt(centerX+(Math.cos(angle)*(@radius)),10)
-      top   = parseInt(centerY-(@radius/2)+(Math.sin(angle)*(@radius)),10)
+      left  = centerX+(Math.cos(angle)*(@radius))
+      top   = centerY-(@radius/2)+(Math.sin(angle)*(@radius))
       
       size = @radius
       if left < 0 then left -= 1
@@ -59,29 +64,46 @@ class Burst extends motion.Bit
         height: size
         marginTop: -(size/2)
       ,
-        duration: 500
+        duration: 400
 
       rotateAngle += @rotateStep
       angle += @step
 
+    if o.rotation or o.rotationDuration
+      @$el.velocity
+          rotateZ:  o.rotation or 90
+        ,
+          duration: o.rotationDuration or 1200
+
+  reset:->
     @$el.velocity
-        rotateZ: 90
+      rotateZ: 0
+    ,
+      duration: 1
+    for $el, i in @$els
+      $el.velocity
+        translateY: 0
+        translateX: 0
+        marginTop:  0
+        height:     0
       ,
-        duration: 1400
+        duration: 1
 
 window.motion.Burst = Burst
 
 burst = new Burst
-  cnt: 10
-  radius: 50
+  cnt: 3
+  radius: 60
 
-setInterval ->
+# setInterval ->
+#   burst.animate
+#     left: 200
+#     top: 200
+# , 2000
+
+
+$(window).on 'click', (e)->
   burst.animate
-    x: 200
-    y: 200
-, 1000
-
-
-# $(window).on 'click', (e)->
-#   console.log e.pageX
-#   console.log e.pageY
+    left: e.pageX
+    top:  e.pageY
+    rotation: 90

@@ -1226,7 +1226,7 @@ a,
   left: 50%;
 }
 .motion-effect {
-  position: relative;
+  position: absolute;
   overflow: hidden;
 }
 .motion-effect--slice .bit {

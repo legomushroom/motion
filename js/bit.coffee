@@ -1,6 +1,6 @@
 class Bit
-  defaultHeight: 200
-  defaultWidth:  200
+  defaultHeight: 0
+  defaultWidth:  0
   constructor:(@o={})->
     @vars()
     @init?()

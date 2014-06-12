@@ -14,39 +14,30 @@
 
 .motion-effect
   position absolute
-  overflow hidden
+  overflow visible
+  .bit
+    background #777
   &--slice
     .bit
       rect 200%
       left: -200%
-      background white
+      background #111
       position absolute
       opacity 0
 
-  // hl deeppink
-  // .bit
-  //   rect 20px
-  //   background deeppink
   &--burst
-    width  = gs/4
-    height = 0*gs
-    // hll deeppink
     border-radius 50%
+    // hll()
+    width  = gs/8
+    height = 0*gs
     .bit
       width  width
       height height
       margin-top  -(height/2)
-      // margin-left -(width/2)
-      background deeppink
+      margin-left -(width/2)
       position absolute
       nw 50%
       transform-origin left bottom
-
-// .wrap
-//   position absolute
-//   rect 100%
-//   nw 0
-
 
     
     

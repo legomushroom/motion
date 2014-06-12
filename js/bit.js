@@ -2,9 +2,9 @@
   var Bit;
 
   Bit = (function() {
-    Bit.prototype.defaultHeight = 200;
+    Bit.prototype.defaultHeight = 0;
 
-    Bit.prototype.defaultWidth = 200;
+    Bit.prototype.defaultWidth = 0;
 
     function Bit(o) {
       this.o = o != null ? o : {};

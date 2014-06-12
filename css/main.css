@@ -141,6 +141,7 @@ body {
   height: 100%;
   overflow: hidden;
   background-color: #111;
+  background-color: #fff;
 }
 ::selection{
 		background-color: #f59995;
@@ -1227,13 +1228,16 @@ a,
 }
 .motion-effect {
   position: absolute;
-  overflow: hidden;
+  overflow: visible;
+}
+.motion-effect .bit {
+  background: #777;
 }
 .motion-effect--slice .bit {
   width: 200%;
   height: 200%;
   left: -200%;
-  background: #fff;
+  background: #111;
   position: absolute;
   opacity: 0;
 }
@@ -1241,10 +1245,10 @@ a,
   border-radius: 50%;
 }
 .motion-effect--burst .bit {
-  width: 2px;
+  width: 1px;
   height: 0px;
   margin-top: 0px;
-  background: #ff1493;
+  margin-left: -0.5px;
   position: absolute;
   top: 50%;
   left: 50%;

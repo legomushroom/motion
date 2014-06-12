@@ -18,14 +18,15 @@
     };
 
     Burst.prototype.vars = function() {
-      var $el, angle, centerX, centerY, i, left, rotateAngle, top, _i, _len, _ref, _results;
       Burst.__super__.vars.apply(this, arguments);
       if (this.radius == null) {
         this.radius = this.o.radius || 80;
       }
       this.cnt = this.o.cnt - 1;
-      this.step = (1 * Math.PI) / (this.cnt + 1);
-      this.rotateStep = 180 / (this.cnt + 1);
+      this.degree = this.o.degree % 360;
+      this.degreeRate = this.degree / 360;
+      this.step = (this.degreeRate * 2 * Math.PI) / (this.cnt + 1);
+      this.rotateStep = this.degreeRate * 360 / (this.cnt + 1);
       this.cloneBits({
         "class": 'bit',
         cnt: this.cnt
@@ -34,34 +35,11 @@
         width: 2 * this.o.radius || 200,
         height: 2 * this.o.radius || 200
       });
-      this.$el.velocity('stop').velocity({
+      return this.$el.velocity('stop').velocity({
         rotateZ: this.o.initialRotation || 0
       }, {
         duration: 1
       });
-      rotateAngle = 0;
-      angle = 0;
-      centerX = 0;
-      centerY = 0;
-      _ref = this.$els;
-      _results = [];
-      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
-        $el = _ref[i];
-        left = parseInt(centerX + (Math.cos(angle) * this.radius), 10);
-        top = parseInt(centerY + (Math.sin(angle) * this.radius), 10);
-        $el.velocity('stop').velocity({
-          translateX: left / 2,
-          translateY: top / 2,
-          marginTop: 0,
-          rotateZ: rotateAngle + 90,
-          height: 20
-        }, {
-          duration: 1
-        });
-        rotateAngle += this.rotateStep;
-        _results.push(angle += this.step);
-      }
-      return _results;
     };
 
     Burst.prototype.animate = function(o) {
@@ -164,7 +142,8 @@
     radius: size,
     left: 500,
     top: 500,
-    initialRotation: 45
+    initialRotation: -160,
+    degree: 180
   });
 
   $(window).on('click', function(e) {

@@ -9,7 +9,8 @@ class Burst extends motion.Bit
 
   type: 'burst'
 
-  init:()-> @add2Dom(); @
+  init:()->
+    @add2Dom(); @
   
   vars:->
     super
@@ -56,11 +57,11 @@ class Burst extends motion.Bit
       rotateAngle += @rotateStep
       angle += @step
 
-    # if o?.rotation or o?.rotationDuration
-    #   @$el.velocity
-    #       rotateZ:  o?.rotation or 90
-    #     ,
-    #       duration: o?.rotationDuration or 900
+    if o?.rotation or o?.rotationDuration
+      @$el.velocity
+          rotateZ:  o?.rotation or 90
+        ,
+          duration: o?.rotationDuration or 900
 
   reset:->
     @radius ?= @o.radius or 80
@@ -98,18 +99,9 @@ class Burst extends motion.Bit
 
 window.motion.Burst = Burst
 
-
-
-
-
-
-
-
-
-
 size = 80
 burst0 = new Burst
-  cnt: 3
+  cnt: 5
   radius: size
   left: 500
   top:  500

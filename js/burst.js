@@ -30,7 +30,7 @@
     };
 
     Burst.prototype.animate = function(o) {
-      var $el, angle, centerX, centerY, i, left, rotateAngle, size, top, _i, _len, _ref, _results;
+      var $el, angle, centerX, centerY, i, left, rotateAngle, size, top, _i, _len, _ref;
       console.log(o.radius);
       this.reset();
       if (o != null ? o.left : void 0) {
@@ -48,7 +48,6 @@
       centerX = 0;
       centerY = 0;
       _ref = this.$els;
-      _results = [];
       for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
         $el = _ref[i];
         left = centerX + (Math.cos(angle) * this.radius);
@@ -74,9 +73,15 @@
           delay: (o != null ? o.delay : void 0) || 0
         });
         rotateAngle += this.rotateStep;
-        _results.push(angle += this.step);
+        angle += this.step;
       }
-      return _results;
+      if ((o != null ? o.rotation : void 0) || (o != null ? o.rotationDuration : void 0)) {
+        return this.$el.velocity({
+          rotateZ: (o != null ? o.rotation : void 0) || 90
+        }, {
+          duration: (o != null ? o.rotationDuration : void 0) || 900
+        });
+      }
     };
 
     Burst.prototype.reset = function() {
@@ -126,7 +131,7 @@
   size = 80;
 
   burst0 = new Burst({
-    cnt: 3,
+    cnt: 5,
     radius: size,
     left: 500,
     top: 500,

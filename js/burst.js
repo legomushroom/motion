@@ -22,6 +22,12 @@
       if (this.radius == null) {
         this.radius = this.o.radius || 80;
       }
+      if (this.radiusX == null) {
+        this.radiusX = this.o.radiusX || this.radius;
+      }
+      if (this.radiusY == null) {
+        this.radiusY = this.o.radiusY || this.radius;
+      }
       this.cnt = this.o.cnt - 1;
       this.degree = this.o.degree % 360;
       this.degreeRate = this.degree / 360;
@@ -32,8 +38,8 @@
         cnt: this.cnt
       });
       this.$el.css({
-        width: 2 * this.o.radius || 200,
-        height: 2 * this.o.radius || 200
+        width: 2 * this.o.radiusX || 200,
+        height: 2 * this.o.radiusY || 200
       });
       return this.$el.velocity('stop').velocity({
         rotateZ: this.o.initialRotation || 0
@@ -48,12 +54,12 @@
       this.reset();
       if (o != null ? o.left : void 0) {
         this.$el.css({
-          left: o.left - this.radius
+          left: o.left - this.radiusX
         });
       }
       if (o != null ? o.top : void 0) {
         this.$el.css({
-          top: o.top - this.radius
+          top: o.top - this.radiusY
         });
       }
       rotateAngle = 0;
@@ -63,8 +69,8 @@
       _ref = this.$els;
       for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
         $el = _ref[i];
-        left = centerX + (Math.cos(angle) * this.radius);
-        top = centerY - (this.radius / 2) + (Math.sin(angle) * this.radius);
+        left = centerX + (Math.cos(angle) * this.radiusX);
+        top = centerY - (this.radius / 2) + (Math.sin(angle) * this.radiusY);
         size = this.radius;
         if (left < 0) {
           left -= 2;
@@ -112,8 +118,8 @@
       _results = [];
       for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
         $el = _ref[i];
-        left = parseInt(centerX + (Math.cos(angle) * this.radius), 10);
-        top = parseInt(centerY + (Math.sin(angle) * this.radius), 10);
+        left = parseInt(centerX + (Math.cos(angle) * this.radiusX), 10);
+        top = parseInt(centerY + (Math.sin(angle) * this.radiusY), 10);
         $el.velocity('stop').velocity({
           translateX: left / 2,
           translateY: top / 2,
@@ -142,8 +148,8 @@
     radius: size,
     left: 500,
     top: 500,
-    initialRotation: -160,
-    degree: 180
+    initialRotation: -180,
+    degree: 220
   });
 
   $(window).on('click', function(e) {

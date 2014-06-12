@@ -14,6 +14,8 @@ class Burst extends motion.Bit
   vars:->
     super
     @radius ?= @o.radius or 80
+    @radiusX ?= @o.radiusX or @radius
+    @radiusY ?= @o.radiusY or @radius
     @cnt     = @o.cnt-1
     
     @degree = @o.degree % 360
@@ -27,8 +29,8 @@ class Burst extends motion.Bit
       class: 'bit'
       cnt: @cnt
     @$el.css
-      width:  2*@o.radius or 200
-      height: 2*@o.radius or 200
+      width:  2*@o.radiusX or 200
+      height: 2*@o.radiusY or 200
 
     @$el.velocity('stop')
       .velocity
@@ -43,18 +45,18 @@ class Burst extends motion.Bit
 
     if o?.left
       @$el.css
-        left: o.left - @radius
+        left: o.left - @radiusX
     if o?.top
       @$el.css
-        top: o.top - @radius
+        top: o.top - @radiusY
 
     rotateAngle = 0
     angle = 0
     centerX = 0
     centerY = 0
     for $el, i in @$els
-      left  = centerX+(Math.cos(angle)*(@radius))
-      top   = centerY-(@radius/2)+(Math.sin(angle)*(@radius))
+      left  = centerX+(Math.cos(angle)*(@radiusX))
+      top   = centerY-(@radius/2)+(Math.sin(angle)*(@radiusY))
       
       size = @radius
       if left < 0 then left -= 2
@@ -80,8 +82,6 @@ class Burst extends motion.Bit
           duration: o?.rotationDuration or 900
 
   reset:->
-    
-
     # @$el.css
     #   transform: "translateX(#{@o.left - @radius}px) translateY(#{@o.top - @radius}px)" 
 
@@ -96,8 +96,8 @@ class Burst extends motion.Bit
     centerX = 0
     centerY = 0
     for $el, i in @$els
-      left  = parseInt(centerX+(Math.cos(angle)*(@radius)),10)
-      top   = parseInt(centerY+(Math.sin(angle)*(@radius)),10)
+      left  = parseInt(centerX+(Math.cos(angle)*(@radiusX)),10)
+      top   = parseInt(centerY+(Math.sin(angle)*(@radiusY)),10)
       $el.velocity('stop')
         .velocity
           translateX:  left/2
@@ -118,8 +118,8 @@ burst0 = new Burst
   radius: size
   left: 500
   top:  500
-  initialRotation: -160
-  degree: 180
+  initialRotation: -180
+  degree: 220
 
 $(window).on 'click', (e)->
   burst0.animate

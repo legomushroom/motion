@@ -57,8 +57,10 @@
       return this.bit.velocity({
         borderWidth: 0,
         width: '100%',
-        height: '100%',
-        opacity: 1000
+        height: '100%'
+      }, {
+        duration: this.o.duration,
+        delay: this.o.delay
       });
     };
 
@@ -66,8 +68,7 @@
       return this.bit.velocity('stop').velocity({
         borderWidth: (this.radius / 2) * this.rate,
         width: this.radius * this.rate,
-        height: this.radius * this.rate,
-        opacity: 0
+        height: this.radius * this.rate
       }, {
         duration: 1
       });
@@ -82,7 +83,8 @@
   size = 20;
 
   bubble0 = new Bubble({
-    radius: size
+    radius: size,
+    duration: 300
   });
 
   size = 40;
@@ -106,7 +108,7 @@
           top: e.pageY
         });
       };
-    })(this), 300);
+    })(this), 200);
   });
 
 }).call(this);

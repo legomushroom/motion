@@ -40,20 +40,19 @@ class Bubble extends motion.Bit
 
     @bit
       .velocity
-        borderWidth: 0
-        width:  '100%'
-        height: '100%'
-        opacity: 1000
+          borderWidth: 0
+          width:  '100%'
+          height: '100%'
+        ,
+          duration: @o.duration
+          delay: @o.delay
       
-
-
   reset:->
     @bit.velocity('stop')
       .velocity
           borderWidth:  (@radius/2)*@rate
           width:        @radius*@rate
           height:       @radius*@rate
-          opacity:      0
         ,
           duration: 1
 
@@ -65,6 +64,8 @@ window.motion.Bubble = Bubble
 size = 20
 bubble0 = new Bubble
   radius: size
+  duration: 300
+  # delay: 300
 
 size = 40
 burst0 = new window.motion.Burst
@@ -84,5 +85,5 @@ $(window).on 'click', (e)->
     burst0.animate
       left: e.pageX
       top:  e.pageY
-  , 300
+  , 200
 

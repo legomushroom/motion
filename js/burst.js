@@ -29,7 +29,7 @@
         this.radiusY = this.o.radiusY || this.radius;
       }
       this.cnt = this.o.cnt - 1;
-      this.degree = this.o.degree % 360;
+      this.degree = this.o.degree % 360 || 360;
       this.degreeRate = this.degree / 360;
       this.step = (this.degreeRate * 2 * Math.PI) / (this.cnt + 1);
       this.rotateStep = this.degreeRate * 360 / (this.cnt + 1);
@@ -38,8 +38,8 @@
         cnt: this.cnt
       });
       this.$el.css({
-        width: 2 * this.o.radiusX || 200,
-        height: 2 * this.o.radiusY || 200
+        width: 2 * this.radiusX || 200,
+        height: 2 * this.radiusY || 200
       });
       return this.$el.velocity('stop').velocity({
         rotateZ: this.o.initialRotation || 0
@@ -50,7 +50,6 @@
 
     Burst.prototype.animate = function(o) {
       var $el, angle, centerX, centerY, i, left, rotateAngle, size, top, _i, _len, _ref;
-      console.log(o.radius);
       this.reset();
       if (o != null ? o.left : void 0) {
         this.$el.css({
@@ -141,15 +140,14 @@
 
   window.motion.Burst = Burst;
 
-  size = 80;
+  size = 40;
 
   burst0 = new Burst({
     cnt: 5,
     radius: size,
     left: 500,
     top: 500,
-    initialRotation: -180,
-    degree: 220
+    initialRotation: -180
   });
 
   $(window).on('click', function(e) {

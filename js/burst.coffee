@@ -18,7 +18,7 @@ class Burst extends motion.Bit
     @radiusY ?= @o.radiusY or @radius
     @cnt     = @o.cnt-1
     
-    @degree = @o.degree % 360
+    @degree = @o.degree % 360 or 360
     @degreeRate = @degree/360
 
     @step = (@degreeRate*2*Math.PI)/(@cnt+1)
@@ -29,8 +29,8 @@ class Burst extends motion.Bit
       class: 'bit'
       cnt: @cnt
     @$el.css
-      width:  2*@o.radiusX or 200
-      height: 2*@o.radiusY or 200
+      width:  2*@radiusX or 200
+      height: 2*@radiusY or 200
 
     @$el.velocity('stop')
       .velocity
@@ -40,7 +40,6 @@ class Burst extends motion.Bit
 
 
   animate:(o)->
-    console.log o.radius
     @reset()
 
     if o?.left
@@ -112,14 +111,14 @@ class Burst extends motion.Bit
 
 window.motion.Burst = Burst
 
-size = 80
+size = 40
 burst0 = new Burst
   cnt: 5
   radius: size
   left: 500
   top:  500
   initialRotation: -180
-  degree: 220
+  # degree: 220
 
 $(window).on 'click', (e)->
   burst0.animate

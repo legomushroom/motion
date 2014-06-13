@@ -1,5 +1,5 @@
 (function() {
-  var Burst, burst0, size,
+  var Burst,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -23,7 +23,7 @@
       this.radius = this.o.radius || 80;
       this.radiusX = this.o.radiusX || this.radius;
       this.radiusY = this.o.radiusY || this.radius;
-      this.cnt = this.o.cnt - 1;
+      this.cnt = this.o.cnt;
       if ((_base = this.o).rate == null) {
         _base.rate = .5;
       }
@@ -34,8 +34,8 @@
       this.rate = this.rate || .5;
       this.degree = this.o.degree % 360 || 360;
       this.degreeRate = this.degree / 360;
-      this.step = (this.degreeRate * 2 * Math.PI) / (this.cnt + 1);
-      this.rotateStep = this.degreeRate * 360 / (this.cnt + 1);
+      this.step = (this.degreeRate * 2 * Math.PI) / this.cnt;
+      this.rotateStep = this.degreeRate * 360 / this.cnt;
       this.cloneBits({
         "class": 'bit',
         cnt: this.cnt
@@ -142,23 +142,5 @@
   })(motion.Bit);
 
   window.motion.Burst = Burst;
-
-  size = 100;
-
-  burst0 = new Burst({
-    cnt: 5,
-    radius: size,
-    left: 500,
-    top: 500,
-    initialRotation: -180,
-    rate: 0
-  });
-
-  $(window).on('click', function(e) {
-    return burst0.animate({
-      left: e.pageX,
-      top: e.pageY
-    });
-  });
 
 }).call(this);

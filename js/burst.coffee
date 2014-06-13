@@ -1,7 +1,7 @@
 # TODO
 # normalize init and animate options
 # change !property to property?
-# add bits rate option
+# fix cnt
 
 
 class Burst extends motion.Bit
@@ -15,7 +15,7 @@ class Burst extends motion.Bit
     @radius  = @o.radius or 80
     @radiusX = @o.radiusX or @radius
     @radiusY = @o.radiusY or @radius
-    @cnt     = @o.cnt-1
+    @cnt     = @o.cnt
     @o.rate ?= .5
     @rate    = @o.rate
     if parseInt(@rate.toFixed(0),10) is 0 then @rate += .000001
@@ -25,8 +25,8 @@ class Burst extends motion.Bit
     @degree = @o.degree % 360 or 360
     @degreeRate = @degree/360
 
-    @step = (@degreeRate*2*Math.PI)/(@cnt+1)
-    @rotateStep = @degreeRate*360/(@cnt+1)
+    @step = (@degreeRate*2*Math.PI)/(@cnt)
+    @rotateStep = @degreeRate*360/(@cnt)
     
 
     @cloneBits
@@ -112,18 +112,18 @@ class Burst extends motion.Bit
 
 window.motion.Burst = Burst
 
-size = 100
-burst0 = new Burst
-  cnt: 5
-  radius: size
-  left: 500
-  top:  500
-  initialRotation: -180
-  rate: 0
-  # degree: 220
+# size = 100
+# burst0 = new Burst
+#   cnt: 5
+#   radius: size
+#   left: 500
+#   top:  500
+#   initialRotation: -180
+#   rate: .75
+#   degree: 220
 
-$(window).on 'click', (e)->
-  burst0.animate
-    left: e.pageX
-    top:  e.pageY
+# $(window).on 'click', (e)->
+#   burst0.animate
+#     left: e.pageX
+#     top:  e.pageY
 

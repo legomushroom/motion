@@ -32,7 +32,7 @@
       }
       $proto = o.$proto || $('<div />');
       _results = [];
-      for (i = _i = 0, _ref = o.cnt || 10; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+      for (i = _i = 0, _ref = o.cnt || 10; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
         $el = $proto.clone();
         o["class"] && $el.addClass("" + (o["class"] || ''));
         o.css && $el.css(o.css);

@@ -1256,3 +1256,19 @@ a,
   -ms-transform-origin: left bottom;
   transform-origin: left bottom;
 }
+.motion-effect--bubble {
+  border-radius: 50%;
+}
+.motion-effect--bubble .bit {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 0 solid #111;
+  background: transparent;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}

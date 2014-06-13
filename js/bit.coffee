@@ -16,7 +16,7 @@ class Bit
 
   cloneBits:(o={})->
     $proto = o.$proto or $('<div />')
-    for i in [0..o.cnt or 10]
+    for i in [0...o.cnt or 10]
       $el = $proto.clone()
       o.class and $el.addClass("#{o.class or ''}")
       o.css and $el.css o.css

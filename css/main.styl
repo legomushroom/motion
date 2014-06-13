@@ -7,7 +7,7 @@
 @import 'css-assets/effects'
 @import 'css-assets/icons'
 
-
+color = #111
 .center
   position absolute
   nw 50%
@@ -21,13 +21,12 @@
     .bit
       rect 200%
       left: -200%
-      background #111
+      background color
       position absolute
       opacity 0
 
   &--burst
     border-radius 50%
-    // hll()
     width  = gs/8
     height = 0*gs
     .bit
@@ -39,7 +38,23 @@
       nw 50%
       transform-origin left bottom
 
-    
-    
+  &--bubble
+    border-radius 50%
+    // hll()
+    .bit
+      rect 0
+      position absolute
+      nw 50%
+      border-radius 50%
+      border 0 solid color
+      background transparent
+      transform translateX(-50%) translateY(-50%)
+
+
+
+
+
+
+
 
 

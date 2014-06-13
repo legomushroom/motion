@@ -18,17 +18,20 @@
     };
 
     Burst.prototype.vars = function() {
+      var _base;
       Burst.__super__.vars.apply(this, arguments);
-      if (this.radius == null) {
-        this.radius = this.o.radius || 80;
-      }
-      if (this.radiusX == null) {
-        this.radiusX = this.o.radiusX || this.radius;
-      }
-      if (this.radiusY == null) {
-        this.radiusY = this.o.radiusY || this.radius;
-      }
+      this.radius = this.o.radius || 80;
+      this.radiusX = this.o.radiusX || this.radius;
+      this.radiusY = this.o.radiusY || this.radius;
       this.cnt = this.o.cnt - 1;
+      if ((_base = this.o).rate == null) {
+        _base.rate = .5;
+      }
+      this.rate = this.o.rate;
+      if (parseInt(this.rate.toFixed(0), 10) === 0) {
+        this.rate += .000001;
+      }
+      this.rate = this.rate || .5;
       this.degree = this.o.degree % 360 || 360;
       this.degreeRate = this.degree / 360;
       this.step = (this.degreeRate * 2 * Math.PI) / (this.cnt + 1);
@@ -70,7 +73,7 @@
         $el = _ref[i];
         left = centerX + (Math.cos(angle) * this.radiusX);
         top = centerY - (this.radius / 2) + (Math.sin(angle) * this.radiusY);
-        size = this.radius;
+        size = this.height || this.radius;
         if (left < 0) {
           left -= 2;
         } else {
@@ -120,8 +123,8 @@
         left = parseInt(centerX + (Math.cos(angle) * this.radiusX), 10);
         top = parseInt(centerY + (Math.sin(angle) * this.radiusY), 10);
         $el.velocity('stop').velocity({
-          translateX: left / 2,
-          translateY: top / 2,
+          translateX: left * this.rate,
+          translateY: top * this.rate,
           marginTop: 0,
           rotateZ: rotateAngle + 90,
           height: 0
@@ -140,14 +143,15 @@
 
   window.motion.Burst = Burst;
 
-  size = 40;
+  size = 100;
 
   burst0 = new Burst({
     cnt: 5,
     radius: size,
     left: 500,
     top: 500,
-    initialRotation: -180
+    initialRotation: -180,
+    rate: 0
   });
 
   $(window).on('click', function(e) {

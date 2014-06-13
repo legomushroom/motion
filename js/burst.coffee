@@ -1,8 +1,7 @@
 # TODO
 # normalize init and animate options
 # change !property to property?
-# get rid of wrapper
-# add bits height option
+# add bits rate option
 
 
 class Burst extends motion.Bit
@@ -13,11 +12,16 @@ class Burst extends motion.Bit
 
   vars:->
     super
-    @radius ?= @o.radius or 80
-    @radiusX ?= @o.radiusX or @radius
-    @radiusY ?= @o.radiusY or @radius
+    @radius  = @o.radius or 80
+    @radiusX = @o.radiusX or @radius
+    @radiusY = @o.radiusY or @radius
     @cnt     = @o.cnt-1
-    
+    @o.rate ?= .5
+    @rate    = @o.rate
+    if parseInt(@rate.toFixed(0),10) is 0 then @rate += .000001
+    @rate    = @rate or .5
+
+
     @degree = @o.degree % 360 or 360
     @degreeRate = @degree/360
 
@@ -57,7 +61,7 @@ class Burst extends motion.Bit
       left  = centerX+(Math.cos(angle)*(@radiusX))
       top   = centerY-(@radius/2)+(Math.sin(angle)*(@radiusY))
       
-      size = @radius
+      size = @height or @radius
       if left < 0 then left -= 2
       else left += 2
       if top < 0 then top -= 2
@@ -81,9 +85,6 @@ class Burst extends motion.Bit
           duration: o?.rotationDuration or 900
 
   reset:->
-    # @$el.css
-    #   transform: "translateX(#{@o.left - @radius}px) translateY(#{@o.top - @radius}px)" 
-
     @$el.velocity('stop')
       .velocity
         rotateZ: @o.initialRotation or 0
@@ -99,8 +100,8 @@ class Burst extends motion.Bit
       top   = parseInt(centerY+(Math.sin(angle)*(@radiusY)),10)
       $el.velocity('stop')
         .velocity
-          translateX:  left/2
-          translateY:  top/2
+          translateX:  left*@rate
+          translateY:  top*@rate
           marginTop: 0
           rotateZ: rotateAngle+90
           height: 0
@@ -111,13 +112,14 @@ class Burst extends motion.Bit
 
 window.motion.Burst = Burst
 
-size = 40
+size = 100
 burst0 = new Burst
   cnt: 5
   radius: size
   left: 500
   top:  500
   initialRotation: -180
+  rate: 0
   # degree: 220
 
 $(window).on 'click', (e)->

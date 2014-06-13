@@ -16,6 +16,11 @@ class Bubble extends motion.Bit
     @radiusX = @o.radiusX or @radius
     @radiusY = @o.radiusY or @radius
 
+    @o.rate ?= .5
+    @rate    = @o.rate
+    if parseInt(@rate.toFixed(0),10) is 0 then @rate += .000001
+    @rate    = @rate or .5
+
     @cloneBits
       class: 'bit'
       cnt:   1
@@ -35,18 +40,19 @@ class Bubble extends motion.Bit
 
     @bit
       .velocity
-          borderWidth: 0
-          width:  '100%'
-          height: '100%'
-          opacity: 1000
+        borderWidth: 0
+        width:  '100%'
+        height: '100%'
+        opacity: 1000
+      
 
 
   reset:->
     @bit.velocity('stop')
       .velocity
-          borderWidth:  @radius/4
-          width:        @radius/2
-          height:       @radius/2
+          borderWidth:  (@radius/2)*@rate
+          width:        @radius*@rate
+          height:       @radius*@rate
           opacity:      0
         ,
           duration: 1

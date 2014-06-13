@@ -18,10 +18,19 @@
     };
 
     Bubble.prototype.vars = function() {
+      var _base;
       Bubble.__super__.vars.apply(this, arguments);
       this.radius = this.o.radius || 80;
       this.radiusX = this.o.radiusX || this.radius;
       this.radiusY = this.o.radiusY || this.radius;
+      if ((_base = this.o).rate == null) {
+        _base.rate = .5;
+      }
+      this.rate = this.o.rate;
+      if (parseInt(this.rate.toFixed(0), 10) === 0) {
+        this.rate += .000001;
+      }
+      this.rate = this.rate || .5;
       this.cloneBits({
         "class": 'bit',
         cnt: 1
@@ -55,9 +64,9 @@
 
     Bubble.prototype.reset = function() {
       return this.bit.velocity('stop').velocity({
-        borderWidth: this.radius / 4,
-        width: this.radius / 2,
-        height: this.radius / 2,
+        borderWidth: (this.radius / 2) * this.rate,
+        width: this.radius * this.rate,
+        height: this.radius * this.rate,
         opacity: 0
       }, {
         duration: 1

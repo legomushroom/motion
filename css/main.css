@@ -1221,6 +1221,43 @@ a,
   fill: #717171;
   cursor: pointer;
 }
+.custom-radio {
+  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid #ff1493;
+  border: 1px solid #111;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.custom-radio__radio {
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+.custom-radio__radio:checked {
+  opacity: 1;
+}
+.custom-radio__radio:checked + __dot {
+  display: block;
+}
+.custom-radio__dot {
+  width: 60%;
+  height: 60%;
+  background: #111;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -30%;
+  margin-top: -30%;
+  border-radius: 50%;
+  display: none;
+  z-index: 0;
+}
 .center {
   position: absolute;
   top: 50%;

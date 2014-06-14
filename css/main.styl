@@ -7,6 +7,7 @@
 @import 'css-assets/effects'
 @import 'css-assets/icons'
 
+use('assets/root-selector.js')
 
 .custom-radio
   position relative
@@ -22,7 +23,7 @@
     z-index 1
     rect 100%
     &:checked
-      opacity 1
+      // opacity 1
       & + {root()}__dot
         display block
   &__dot

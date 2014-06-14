@@ -1239,10 +1239,7 @@ a,
   width: 100%;
   height: 100%;
 }
-.custom-radio__radio:checked {
-  opacity: 1;
-}
-.custom-radio__radio:checked + __dot {
+.custom-radio__radio:checked + .custom-radio__dot {
   display: block;
 }
 .custom-radio__dot {

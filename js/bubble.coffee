@@ -76,12 +76,13 @@ burst0 = new window.motion.Burst
   # initialRotation: -180
   # rate: .75
   # degree: 220
-
+timeout = null
 $(window).on 'click', (e)->
   bubble0.animate
     left: e.pageX
     top:  e.pageY
-  setTimeout =>
+  clearTimeout timeout
+  timeout = setTimeout =>
     burst0.animate
       left: e.pageX
       top:  e.pageY

@@ -1,5 +1,5 @@
 (function() {
-  var Bubble, bubble0, burst0, size,
+  var Bubble, bubble0, burst0, size, timeout,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -96,12 +96,15 @@
     top: 500
   });
 
+  timeout = null;
+
   $(window).on('click', function(e) {
     bubble0.animate({
       left: e.pageX,
       top: e.pageY
     });
-    return setTimeout((function(_this) {
+    clearTimeout(timeout);
+    return timeout = setTimeout((function(_this) {
       return function() {
         return burst0.animate({
           left: e.pageX,

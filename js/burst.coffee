@@ -8,9 +8,7 @@ class Burst extends motion.Bit
 
   type: 'burst'
 
-  init:()-> 
-    @add2Dom(); @
-    @reset()
+  init:()-> @add2Dom(); @
 
   vars:->
     super
@@ -76,6 +74,8 @@ class Burst extends motion.Bit
       ,
         duration: 300
         delay: o?.delay or 0
+        complete:->
+          @$el.hide()
 
       rotateAngle += @rotateStep
       angle += @step
@@ -90,8 +90,6 @@ class Burst extends motion.Bit
     @$el.velocity('stop')
       .velocity
         rotateZ: @o.initialRotation or 0
-        left: @o.left
-        top:  @o.top
       ,
         duration: 1
 
@@ -101,14 +99,14 @@ class Burst extends motion.Bit
     centerY = 0
     for $el, i in @$els
       left  = parseInt(centerX+(Math.cos(angle)*(@radiusX)),10)
-      top   = parseInt(centerY-(60)+(Math.sin(angle)*(@radiusY)),10)
+      top   = parseInt(centerY+(Math.sin(angle)*(@radiusY)),10)
       $el.velocity('stop')
         .velocity
           translateX:  left*@rate
           translateY:  top*@rate
           marginTop: 0
           rotateZ: rotateAngle+90
-          height: 30
+          height: 0
         ,
           duration: 1
       rotateAngle += @rotateStep
@@ -116,18 +114,18 @@ class Burst extends motion.Bit
 
 window.motion.Burst = Burst
 
-# size = 100
-# burst0 = new Burst
-#   cnt: 5
-#   radius: size
-#   left: 500
-#   top:  500
-#   initialRotation: -180
-#   rate: .75
-#   degree: 220
+size = 100
+burst0 = new Burst
+  cnt: 5
+  radius: size
+  left: 500
+  top:  500
+  initialRotation: -180
+  rate: .75
+  degree: 220
 
-# $(window).on 'click', (e)->
-#   burst0.animate
-#     left: e.pageX
-#     top:  e.pageY
+$(window).on 'click', (e)->
+  burst0.animate
+    left: e.pageX
+    top:  e.pageY
 

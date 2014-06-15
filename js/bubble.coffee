@@ -65,24 +65,24 @@ window.motion.Bubble = Bubble
 #   rotation: 90
 #   # delay: 300
 
-size = 100
-burst0 = new window.motion.Burst
-  cnt: 5
-  radius: size
-  left: 50
-  top:  50
-  initialRotation: -45
-  rate: .5
-  # degree: 220
-timeout = null
-$(window).on 'click', (e)->
-  # bubble0.animate
-  #   left: e.pageX
-  #   top:  e.pageY
-  clearTimeout timeout
-  timeout = setTimeout =>
-    burst0.animate
-      left: e.pageX
-      top:  e.pageY
-  , 200
+# size = 100
+# burst0 = new window.motion.Burst
+#   cnt: 5
+#   radius: size
+#   left: 50
+#   top:  50
+#   initialRotation: -45
+#   rate: .5
+#   # degree: 220
+# timeout = null
+# $(window).on 'click', (e)->
+#   # bubble0.animate
+#   #   left: e.pageX
+#   #   top:  e.pageY
+#   clearTimeout timeout
+#   timeout = setTimeout =>
+#     burst0.animate
+#       left: e.pageX
+#       top:  e.pageY
+#   , 200
 

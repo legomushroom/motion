@@ -56,31 +56,29 @@ class Bubble extends motion.Bit
         ,
           duration: 1
 
-
-    
-
 window.motion.Bubble = Bubble
 
-size = 20
-bubble0 = new Bubble
-  radius: size
-  duration: 300
-  # delay: 300
+# size = 80
+# bubble0 = new Bubble
+#   radius: size
+#   duration: 300
+#   rotation: 90
+#   # delay: 300
 
-size = 40
+size = 100
 burst0 = new window.motion.Burst
   cnt: 5
   radius: size
-  left: 500
-  top:  500
-  # initialRotation: -180
-  # rate: .75
+  left: 50
+  top:  50
+  initialRotation: -45
+  rate: .5
   # degree: 220
 timeout = null
 $(window).on 'click', (e)->
-  bubble0.animate
-    left: e.pageX
-    top:  e.pageY
+  # bubble0.animate
+  #   left: e.pageX
+  #   top:  e.pageY
   clearTimeout timeout
   timeout = setTimeout =>
     burst0.animate

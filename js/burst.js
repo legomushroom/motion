@@ -14,7 +14,8 @@
 
     Burst.prototype.init = function() {
       this.add2Dom();
-      return this;
+      this;
+      return this.reset();
     };
 
     Burst.prototype.vars = function() {
@@ -108,7 +109,9 @@
     Burst.prototype.reset = function() {
       var $el, angle, centerX, centerY, i, left, rotateAngle, top, _i, _len, _ref, _results;
       this.$el.velocity('stop').velocity({
-        rotateZ: this.o.initialRotation || 0
+        rotateZ: this.o.initialRotation || 0,
+        left: this.o.left,
+        top: this.o.top
       }, {
         duration: 1
       });
@@ -121,13 +124,13 @@
       for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
         $el = _ref[i];
         left = parseInt(centerX + (Math.cos(angle) * this.radiusX), 10);
-        top = parseInt(centerY + (Math.sin(angle) * this.radiusY), 10);
+        top = parseInt(centerY - 60. + (Math.sin(angle) * this.radiusY), 10);
         $el.velocity('stop').velocity({
           translateX: left * this.rate,
           translateY: top * this.rate,
           marginTop: 0,
           rotateZ: rotateAngle + 90,
-          height: 0
+          height: 30
         }, {
           duration: 1
         });

@@ -8,7 +8,9 @@ class Burst extends motion.Bit
 
   type: 'burst'
 
-  init:()-> @add2Dom(); @
+  init:()-> 
+    @add2Dom(); @
+    @reset()
 
   vars:->
     super
@@ -88,6 +90,8 @@ class Burst extends motion.Bit
     @$el.velocity('stop')
       .velocity
         rotateZ: @o.initialRotation or 0
+        left: @o.left
+        top:  @o.top
       ,
         duration: 1
 
@@ -97,14 +101,14 @@ class Burst extends motion.Bit
     centerY = 0
     for $el, i in @$els
       left  = parseInt(centerX+(Math.cos(angle)*(@radiusX)),10)
-      top   = parseInt(centerY+(Math.sin(angle)*(@radiusY)),10)
+      top   = parseInt(centerY-(60)+(Math.sin(angle)*(@radiusY)),10)
       $el.velocity('stop')
         .velocity
           translateX:  left*@rate
           translateY:  top*@rate
           marginTop: 0
           rotateZ: rotateAngle+90
-          height: 0
+          height: 30
         ,
           duration: 1
       rotateAngle += @rotateStep

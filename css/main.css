@@ -1278,12 +1278,13 @@ a,
 }
 .motion-effect--burst {
   border-radius: 50%;
+  border: 1px solid #ff1493;
 }
 .motion-effect--burst .bit {
-  width: 1px;
+  width: 4px;
   height: 0px;
   margin-top: 0px;
-  margin-left: -0.5px;
+  margin-left: -2px;
   position: absolute;
   top: 50%;
   left: 50%;

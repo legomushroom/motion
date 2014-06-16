@@ -23,7 +23,7 @@
       this.radius = this.o.radius || 80;
       this.radiusX = this.o.radiusX || this.radius;
       this.radiusY = this.o.radiusY || this.radius;
-      this.cnt = this.o.cnt;
+      this.cnt = this.o.cnt || 3;
       if ((_base = this.o).rate == null) {
         _base.rate = .5;
       }

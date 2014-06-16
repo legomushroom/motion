@@ -1270,7 +1270,12 @@ a,
 .motion-effect--spark .bit {
   width: 2px;
   height: 10px;
-  border: 1px solid #ff1493;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  -webkit-transform-origin: center bottom;
+  -ms-transform-origin: center bottom;
+  transform-origin: center bottom;
 }
 .motion-effect--slice .bit {
   width: 200%;

@@ -14,7 +14,7 @@ class Burst extends motion.Bit
     @radius  = @o.radius or 80
     @radiusX = @o.radiusX or @radius
     @radiusY = @o.radiusY or @radius
-    @cnt     = @o.cnt
+    @cnt     = @o.cnt or 3
     @o.rate ?= .5
     @rate    = @o.rate
     if parseInt(@rate.toFixed(0),10) is 0 then @rate += .000001
@@ -27,7 +27,6 @@ class Burst extends motion.Bit
     @step = (@degreeRate*2*Math.PI)/(@cnt)
     @rotateStep = @degreeRate*360/(@cnt)
     
-
     @cloneBits
       class: 'bit'
       cnt: @cnt

@@ -1,5 +1,5 @@
 (function() {
-  var Burst,
+  var Burst, burst0, size,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -14,8 +14,7 @@
 
     Burst.prototype.init = function() {
       this.add2Dom();
-      this;
-      return this.reset();
+      return this;
     };
 
     Burst.prototype.vars = function() {
@@ -92,7 +91,10 @@
           marginTop: -(size / 2)
         }, {
           duration: 300,
-          delay: (o != null ? o.delay : void 0) || 0
+          delay: (o != null ? o.delay : void 0) || 0,
+          complete: function() {
+            return this.$el.hide();
+          }
         });
         rotateAngle += this.rotateStep;
         angle += this.step;
@@ -109,9 +111,7 @@
     Burst.prototype.reset = function() {
       var $el, angle, centerX, centerY, i, left, rotateAngle, top, _i, _len, _ref, _results;
       this.$el.velocity('stop').velocity({
-        rotateZ: this.o.initialRotation || 0,
-        left: this.o.left,
-        top: this.o.top
+        rotateZ: this.o.initialRotation || 0
       }, {
         duration: 1
       });
@@ -124,13 +124,13 @@
       for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
         $el = _ref[i];
         left = parseInt(centerX + (Math.cos(angle) * this.radiusX), 10);
-        top = parseInt(centerY - 60. + (Math.sin(angle) * this.radiusY), 10);
+        top = parseInt(centerY + (Math.sin(angle) * this.radiusY), 10);
         $el.velocity('stop').velocity({
           translateX: left * this.rate,
           translateY: top * this.rate,
           marginTop: 0,
           rotateZ: rotateAngle + 90,
-          height: 30
+          height: 0
         }, {
           duration: 1
         });
@@ -145,5 +145,24 @@
   })(motion.Bit);
 
   window.motion.Burst = Burst;
+
+  size = 100;
+
+  burst0 = new Burst({
+    cnt: 5,
+    radius: size,
+    left: 500,
+    top: 500,
+    initialRotation: -180,
+    rate: .75,
+    degree: 220
+  });
+
+  $(window).on('click', function(e) {
+    return burst0.animate({
+      left: e.pageX,
+      top: e.pageY
+    });
+  });
 
 }).call(this);

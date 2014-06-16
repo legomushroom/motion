@@ -1,5 +1,5 @@
 (function() {
-  var Bubble, burst0, size, timeout,
+  var Bubble, bubble0, burst0, size, timeout,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -80,20 +80,29 @@
 
   window.motion.Bubble = Bubble;
 
-  size = 100;
+  size = 20;
+
+  bubble0 = new Bubble({
+    radius: size,
+    duration: 300
+  });
+
+  size = 40;
 
   burst0 = new window.motion.Burst({
     cnt: 5,
     radius: size,
-    left: 50,
-    top: 50,
-    initialRotation: -45,
-    rate: .5
+    left: 500,
+    top: 500
   });
 
   timeout = null;
 
   $(window).on('click', function(e) {
+    bubble0.animate({
+      left: e.pageX,
+      top: e.pageY
+    });
     clearTimeout(timeout);
     return timeout = setTimeout((function(_this) {
       return function() {

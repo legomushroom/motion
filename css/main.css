@@ -1267,6 +1267,11 @@ a,
 .motion-effect .bit {
   background: #777;
 }
+.motion-effect--spark .bit {
+  width: 2px;
+  height: 10px;
+  border: 1px solid #ff1493;
+}
 .motion-effect--slice .bit {
   width: 200%;
   height: 200%;

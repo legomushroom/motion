@@ -3,7 +3,6 @@
 # change !property to property?
 # fix cnt
 
-
 class Burst extends motion.Bit
 
   type: 'burst'

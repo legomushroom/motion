@@ -1281,10 +1281,10 @@ a,
   border: 1px solid #ff1493;
 }
 .motion-effect--burst .bit {
-  width: 4px;
+  width: 2px;
   height: 0px;
   margin-top: 0px;
-  margin-left: -2px;
+  margin-left: -1px;
   position: absolute;
   top: 50%;
   left: 50%;

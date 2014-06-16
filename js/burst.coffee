@@ -74,8 +74,6 @@ class Burst extends motion.Bit
       ,
         duration: 300
         delay: o?.delay or 0
-        complete:->
-          @$el.hide()
 
       rotateAngle += @rotateStep
       angle += @step
@@ -124,8 +122,8 @@ burst0 = new Burst
   rate: .75
   degree: 220
 
-$(window).on 'click', (e)->
-  burst0.animate
-    left: e.pageX
-    top:  e.pageY
+# $(window).on 'click', (e)->
+#   burst0.animate
+#     left: e.pageX
+#     top:  e.pageY
 

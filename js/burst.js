@@ -91,10 +91,7 @@
           marginTop: -(size / 2)
         }, {
           duration: 300,
-          delay: (o != null ? o.delay : void 0) || 0,
-          complete: function() {
-            return this.$el.hide();
-          }
+          delay: (o != null ? o.delay : void 0) || 0
         });
         rotateAngle += this.rotateStep;
         angle += this.step;
@@ -156,13 +153,6 @@
     initialRotation: -180,
     rate: .75,
     degree: 220
-  });
-
-  $(window).on('click', function(e) {
-    return burst0.animate({
-      left: e.pageX,
-      top: e.pageY
-    });
   });
 
 }).call(this);
